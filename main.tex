@@ -6,6 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usepackage{mathdots}
 \usetikzlibrary{cd}
 
 \usepackage[letterpaper, portrait, margin=1in]{geometry}
@@ -1370,8 +1371,89 @@ In these execises $R$ is a ring with $1$ and $M$ is a left $R$-module.
 			$m_T(x)$ must divide the characterisitic polynomial $c_T(x)$ and $c_T(x)$ can have no factors that do not divide $m_T(x)$, so its only factor is $m_T(x)$.
 			If the dimension of $V$ is exactly $3$, then $m_T(x)=c_T(x)$ and linear transformations in three-dimensional spaces are determined by their minimal and characteristic polynomials.
 		\end{proof}
-		
 \end{enumerate}
+\section{The Jordan Canonical Form}
+\begin{enumerate} 
+	\setcounter{enumi}{1}
+	\item Prove that if $\lambda_1,...,\lambda_n$ are the eigenvalues of the $n\times n$ matric $A$ then $\lambda^k_1,...,\lambda^k_n$ are eigenvalues of the matrix $A^k$ for any $k\geq 0$.
+		\begin{proof}
+			$A$ and $A'$ have the same eigenvalues if they are similar, so we only need to consider when $A$ is in Jordan Canonical form.
+			In that case, the diagonal of $A^k$ will clearly be given by the diagonal of $A$ raised to the $k$ pointwise, and since the eigenvalues are on the diagonal in the Jordan Canonical form, the claim follows.
+		\end{proof}
+		
+		\setcounter{enumi}{16}
+	\item Prove that any matrix $A$ is similar to its transpose $A^T$.
+		\begin{proof}
+			Let 
+			$$T=\begin{pmatrix}0&\cdots&1\\\vdots&\iddots\\1&&0\end{pmatrix}$$ 
+			then $TAT^{-1}=A^T$
+		\end{proof}
+	\item Determine all possible Jordan canonical forms for a linear transformation with characteristic polynomial $c_A(x)=(x-2)^3(x-3)^2$.
+		\begin{proof}
+			$$J_A\in\left\{\begin{pmatrix}2\\&2\\&&2\\&&&3\\&&&&3\end{pmatrix},
+				\begin{pmatrix}2&1\\&2\\&&2\\&&&3\\&&&&3\end{pmatrix},
+				\begin{pmatrix}2&1\\&2&1\\&&2\\&&&3\\&&&&3\end{pmatrix}, \cdots,
+				\begin{pmatrix}2&1\\&2&1\\&&2\\&&&3&1\\&&&&3\end{pmatrix}
+			\right\}$$ 
+		\end{proof}
+		\setcounter{enumi}{19}
+	\item Show that the following matrices are similar in $M_p (\F_p)$:
+		$$\begin{pmatrix}0&0&0&\cdots&0&1\\1&0&0&\cdots&0&0\\0&1&0&\cdots&0&0\\\vdots&\vdots&\vdots&&\vdots&\vdots\\0&0&0&\cdots&1&0\end{pmatrix}\text{ and }
+		\begin{pmatrix}1&1&0&\cdots&0&0\\0&1&1&\cdots&0&0\\0&0&1&\cdots&0&0\\\vdots&\vdots&\vdots&&\vdots&\vdots\\0&0&0&\cdots&1&1\\0&0&0&\cdots&0&1\end{pmatrix}$$
+		\begin{proof}
+			The matrix on the left is in rational canonical form and has characteristic polynomial $x^p-1=(x-1)^p$, and so its only eigenvalue is $1$ with multiplicity $p$.
+			The matrix on the right is in Jordan canonical form, and so it is easy to see that its only elementary divisor is $(x-1)^p$.
+		\end{proof}
+	\item Show that if $A^2=A$ then $A$ is similar to a diagonal matrix which has only $0$'s and $1$'s along the diagonal.
+		\begin{proof}
+			Without loss of generality, assume that $A$ is in Jordan canonical form. First, we notice that if $\lambda$ is an eigenvalue for $A$, then $\lambda^2$ is an eigenvalue for $A^2$
+			since $A^2v=AAv=A\lambda v=\lambda Av=\lambda^2$. The only numbers for which $\lambda^2=\lambda$ are $0$ and $1$, so the diagonal entries can only be those.
+			It is easy to see that $A$ cannot have any non-diagonal blocks since 
+			$$\begin{pmatrix}1&1\\0&1\end{pmatrix}^2=\begin{pmatrix}1&2\\0&1\end{pmatrix}$$
+		\end{proof}
+	\item Prove that an $n\times n$ matrix $A$ with entries from $\C$ satifying $A^3=A$ can be diagonalized. Is the same statement true over \textit{any} field?
+		\begin{proof}
+			If $A^3=A$, then $A^2=I$, so $m_A(x)=x^2-1$ is the minimal polynomial for $A$ (unless $A$ is $0, I,$ or $-I$, in which case there is nothing to show).
+			Since $m_A(x)$ has no repeated roots in $\C$, $A$ is diagonalizable. In $\F_2$, $m_A(x)$ does have repeated roots, and so $A$ need not be diagonalizable. For example:
+			$$A=\begin{pmatrix}1&1\\0&1\end{pmatrix}$$
+		\end{proof}
+	\item Suppose $A$ is a $2\times 2$ mtrix with entries from $\Q$ for which $A^3=I$ but $A\neq I$. 
+		Write $A$ in rational canonical form and in Jordan Canonical form viewed as a matrix over $\C$.
+		\begin{proof}
+			We have that $A^3-I=(A-I)(A^2+A+I)=0$ and $A\neq I$, so $m_A(x)=x^2+x+1$ is the minimal polynomial for $A$.
+			Since $m_A(x)$ is degree $2$, it is also the characteristic polynomial. Letting $\omega$ be a primitive $3^{rd}$ root of unity, we have:
+			$$R_A=\begin{pmatrix}0&-1\\1&-1\end{pmatrix}\text{ and }J_A=\begin{pmatrix}\omega&0\\0&\omega^2\end{pmatrix}.$$
+		\end{proof}
+		\setcounter{enumi}{24}
+	\item Determine the Jordan canonical form for the $n\times n$ matrix $A$ over $\Q$ whose entries are all equal to $1$.
+		\begin{proof}
+			Using row and column operations, we get that $J_A$ has all $0$s except for a $1$ in the bottom or top corner, depending on convention.
+		\end{proof}
+	\item Determine the Jordan canonical form for the $n\times n$ matrix $A$ over $\F_p$ whose entries are all equal to $1$.
+		\begin{proof}
+			Note that $A^2$ has all $n$ for all of its entries. If $p$ divides $n$, then $x^2$ is the minimal polynomial and so $J_A$ has $0$s everywhere except a single $1$ above the diagonal.
+			If $p$ does not divide $n$, then we get the same answer as in 12.3.25.
+		\end{proof}
+		\setcounter{enumi}{30}
+	\item Let $N$ be an $n\times n$ matrix with coefficients in the field $F$. The matrix $N$ is said to be nilpotent if $N^k=0$ for some $k$.
+		Prove that any nilpotent matrix is similar to a block diagonal matrix whose blocks are matrices with $1$'s along the first superdiagonal and $0$'s elsewhere.
+		\begin{proof}
+			The minimal polynomial is $m_N(x)=x^k$, and so the characteristic polynomial is $c_N(x)=x^n$. 
+			Since all eigenvalues are $0$, $J_A$ will have $0$'s along the diagonal.
+			If $v$ is an eigenvector for $N$, then $Nv=0$, so $v\in\ker N$. 
+			Therefore, at least one $v$ has geometric multiplicity greater than $1$ unless $k=1$, in which case $N=0$.
+		\end{proof}
+	\item Prove that $N$ is an $n\times n$ nilpotent matrix then in fact $N^n=0$.
+		\begin{proof}
+			As stated above, $m_N(x)=x^k$, so $c_N(x)=x^n$. 
+		\end{proof}
+		\setcounter{enumi}{33}
+	\item Prove that the trace of a nilpotent $n\times n$ matrix is $0$.
+		\begin{proof}
+			This is immediate from 12.3.31 and the definition of the trace.
+		\end{proof}
+\end{enumerate}
+
 
 \chapter{Field Theory}
 \section{Basic Theory of Field Extensions}
