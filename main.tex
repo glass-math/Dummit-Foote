@@ -18,6 +18,7 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\rarrow}{\rightarrow}
 
+\DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\An}{Ann}
@@ -1291,19 +1292,85 @@ In these execises $R$ is a ring with $1$ and $M$ is a left $R$-module.
 \end{enumerate}
 \section{The Rational Canonical Form}
 \begin{enumerate} 
-	\item 
+	\item Prove that similar linear transformations of $V$ (or $n\times n$ matrices) have the same characteristic and the same minimal polynomial.
+		\begin{proof}
+			If $\sigma,\tau:V\to V$ are similar, they have the same eigenvalues and multiplicities. Since the characteristic polynomial of a linear transformation
+			is that which has the eigenvalues with their respective multiplicities at roots, $\sigma$ and $\tau$ must have the same characteristic polynomial.
+			If the similarity between $\sigma$ and $\tau$ is witnessed by $\varphi:V\to V$, so that $\varphi\sigma\varphi^{-1}=\tau$, then for any $k\in\Z$ and $\alpha\in F$,
+			$\alpha(\varphi\sigma\varphi^{-1})^k=\varphi(\alpha\sigma^k)\varphi^{-1}$. Therefore, if $m_\sigma(x)$ is the minimal polynomial for $\sigma$,
+			then by linearity,
+			$$m_\sigma(\tau)=m_\sigma(\varphi\sigma\varphi^{-1})=\varphi m_\sigma(\sigma)\varphi^{-1}=0$$
+			and since $m_\sigma(x)$ is irreducible, it must be the minimal polynomial for $\tau$ as well.
+		\end{proof}
 		\setcounter{enumi}{2}
-	\item 
-	\item 
-	\item 
-	\item 
-		\setcounter{enumi}{7}
-	\item 
+	\item Prove that two $2\times 2$ matrices over $F$ which are not scalar matrices are similar if and only if they have the same characteristic polynomial.
+		\begin{proof}
+			We have already showed that if $A$ and $B$ are similar, their minimal and characteristic polynomials are equal.
+			Conversely, if $c_A(x)=c_B(x)$ and $A$ and $B$ are not scalar, then $c_A(x)$ and $c_B(x)$ must have two invariant factors.
+			That is, $m_A(x)=m_B(x)=c_A(x)=c_B(x)$, and so $A$ and $B$ share a rational canonical form (and are both similar to it).
+		\end{proof}
+	\item Prove that two $3\times 3$ matrices are similar if and only if they have the same characteristic and same minimal polynomials.
+		\begin{proof}
+			We have already showed that if $A$ and $B$ are similar, their minimal and characteristic polynomials are equal.
+			Conversely, if $c_A(x)=c_B(x)$ and $A$ and $B$ are not scalar, then $c_A(x)$ and $c_B(x)$ must have two or three invariant factors.
+			Either way, the rational canonical form is fully determined, and $A$ and $B$ are both similar to it.
+			\newline
+
+			If $A$ and $B$ are $4\times 4$, this does not necessarily hold. For example, if 
+			$$A=\begin{pmatrix}\lambda\\&\lambda\\&&0&-\lambda^2\\&&1&2\lambda\end{pmatrix}\text{ and }
+			\begin{pmatrix}0&-\lambda^2\\1&2\lambda\\&&0&-\lambda^2\\&&1&2\lambda\end{pmatrix}$$
+			then $m_A(x)=m_B(x)=(x-\lambda)^2$ and $c_A(x)=c_B(x)=(1-\lambda)^4$, but these matrices are already in rational canonical form, and so it is easy to see they are not similar.
+		\end{proof}
+	\item Prove directly from the fact that the collection of \textit{all} linear transformartions of an $n$ dimensional vector space $V$ over $F$ to itself form a vector space over $F$ of dimension $n^2$
+		that the minimal polynomial of a linear transformation $T$ has degree at most $n^2$.
+		\begin{proof}
+			Notice that the collection $\{T^0,T^1,...,T^{n^2}\}\subseteq \End(V)$ has $n^2+1$ elements and so they must be $F$-linearly \textit{dependent}. 
+			Thus, there are $a_0,...,a_{n^2}\in F$ such that $a_{n^2}T^{n^2}+...+a_0=0$. Now we can easily see that the polynomial $f(x)=a_{n^2}x^{n^2}+...+a_0$
+			annihilates $T$, so that it is an upper bound for $m_T(x)$ (in terms of degree).
+		\end{proof}
+	\item Prove that the constant term in the characteristic polynomial of the $n\times n$ matrix $A$ is $(-1)^n\det A$ and that the coefficient of $x^{n-1}$
+		is the negative of the sum of the diagonal entries of $A$ (called the \textit{trace}). Prove that $\det A$ is the product of the eigenvalues of $A$ and that the trace of $A$ is the sum of the eigenvalues of $A$.
+		\begin{proof}
+			The constant term of any polynomial is given by its evaluation at $0$. Hence 
+			$$a_0=c_A(0)=\det(0I-A)=(-1)^n\det A.$$
+			Since $c_A(x)=c_A'(x)$ if $A$ and $A'$ are similar, we need only consider the case in which $A$ is in rational canonical form.
+			In that case, if $\alpha_i(x)=a_{i,n}a^n+a_{i,n-1}a^{n-1}+...+a_{i,0}$ for $i\in\{1,...,k\}$ are the invariant factors, the only non-zero terms on the diagonal of $A$ will be the $a_{i,n-1}$ for each $i$.
+			Moreover, since $c_A(x)=\prod_{i\leq k}\alpha_i(x)$, we have that the $n-1^{th}$ coefficient of $c_A(x)$ is given by $\sum_{i\leq k}a_{i,n-1}=\tr A$.
+			Eigenvalues are the roots of the characteristic polynomial $c_A$, so it is clear that their sum is the $n-1^{th}$ coefficient and their product the $0^{th}$.
+		\end{proof}
 		\setcounter{enumi}{10}
-	\item 
+	\item Find all similarity classes of $6\times 6$ matrices over $\C$ with the characteristic polynomial $(x^4-1)(x^2-1)$.
+		\begin{proof}
+			Note that $(x^4-1)(x^2-1)=(x-1)^2(x+1)^2(x+i)(x-i)$.
+			The highest multiplicity is $2$, so each class can have at most $2$ invariant factors. The following options are possible:
+			\begin{enumerate} [label=(\roman*)]
+				\item $a_1(x)=(x-1)(x+1)$, $a_2(x)=x^4-1$ in which case the similarity class is represented by:
+					$$\begin{pmatrix}0&1\\1&0\\&&0&0&0&1\\&&1&0&0&0\\&&0&1&0&0\\&&0&0&1&0 \end{pmatrix}$$
+				\item $a_1(x)=(x-1)$, $a_2(x)=(x+1)(x^4-1)=x^5+x^4-x-1$ in which case the similarity class is represented by:
+					$$\begin{pmatrix}1\\&0&0&0&0&1\\&1&0&0&0&1\\&0&1&0&0&0\\&0&0&1&0&0\\&0&0&0&1&-1 \end{pmatrix}$$	
+				\item $a_1(x)=(x+1)$, $a_2(x)=(x-1)(x^4-1)=x^5-x^4-x+1$ in which case the similarity class is represented by:
+					$$\begin{pmatrix}-1\\&0&0&0&0&-1\\&1&0&0&0&1\\&0&1&0&0&0\\&0&0&1&0&0\\&0&0&0&1&1 \end{pmatrix}$$
+				\item $a_1(x)=(x^2-1)(x^4-1)=x^6-x^4-x^2+1$ in which case the similarity class is represented by:
+					$$\begin{pmatrix}0&0&0&0&0&-1\\1&0&0&0&0&0\\0&1&0&0&0&1\\0&0&1&0&0&0\\0&0&0&1&0&1\\0&0&0&0&1&0 \end{pmatrix}$$
+
+			\end{enumerate}
+		\end{proof}
+		
 		\setcounter{enumi}{16}
-	\item 
-	\item 
+	\item Determine the representatives for the conjugacy classes for $\GL_3(\F_2)$.
+		\newline
+
+		Matrices will be determined by the characteristic and minimal polynomial. 
+		There are four degree $3$ polynomials over $\F_2$ which do not vanish at $0$. $(x+1)^3$ can have itself as a minimal polynomial or $x+1$ or $x^2+1$. 
+		The others, $x^3+1$, $x^3+x^2+1$, and $x^3+x+1$ must each also be the minimal polynomial when they are the characteristic polynomial.
+	\item Let $V$ be a finite dimensional vector space over $\Q$ and suppose $T$ is a nonsingular linear transformation of $V$ such that $T^{-1}=T^2+T$.
+		Prove that the dimension of $V$ is divisible by $3$. If the dimension is precisely $3$, prove that all such tranformations $T$ are similar.
+		\begin{proof}
+			Multiplying both sides by $T$, we get that $T^3+T^2-1=0$. $x^3+x^2-1$ is irreducible over $\Q$, so it is the minimal polynomial $m_T(x)$.
+			$m_T(x)$ must divide the characterisitic polynomial $c_T(x)$ and $c_T(x)$ can have no factors that do not divide $m_T(x)$, so its only factor is $m_T(x)$.
+			If the dimension of $V$ is exactly $3$, then $m_T(x)=c_T(x)$ and linear transformations in three-dimensional spaces are determined by their minimal and characteristic polynomials.
+		\end{proof}
+		
 \end{enumerate}
 
 \chapter{Field Theory}
