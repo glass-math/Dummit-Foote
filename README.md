@@ -1,1 +1,1 @@
-![](./main.pdf)
+[View the pdf](./main.pdf)
